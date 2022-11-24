@@ -1,0 +1,16 @@
+{
+  "name": "wbpress-vol129-ch4-sample",
+  "version": "1.0.0",
+  "description": "Web DB PRESS Vol.129 第4章のサンプルコードです",
+  "main": "figma.js",
+  "scripts": {
+    "build:json": "node figma.js",
+    "build:css": "style-dictionary build"
+  },
+  "author": "Hiroki Tani",
+  "license": "MIT",
+  "devDependencies": {
+    "node-fetch": "^3.2.4",
+    "style-dictionary": "^3.7.0"
+  }
+}
