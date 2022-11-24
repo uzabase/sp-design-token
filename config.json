@@ -3,10 +3,10 @@
   "platforms": {
     "css": {
       "transformGroup": "css",
-      "buildPath": "build/css",
+      "buildPath": "dist/",
       "files": [
         {
-          "destination": "design-tokens.css",
+          "destination": "speeda-tokens.css",
           "format": "css/variables",
           "options": {
             "outputReferences": true
