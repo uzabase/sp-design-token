@@ -7,7 +7,6 @@ const writeFile = promisify(fs.writeFile);
 
 const TOKEN = process.env.FIGMA_TOKEN;
 const FIGMA_FILE_KEY = process.env.FIGMA_DESIGN_FILE_KEY;
-const PREFIX = "base";
 
 const fetchFigma = (path) =>
   fetch(`https://api.figma.com/v1/files/${FIGMA_FILE_KEY}${path}`, {
@@ -41,29 +40,47 @@ const main = async () => {
   );
 
   // Generate color tokens
-  const colors = {};
+  const colors = ['black', 'gray', 'blue', 'green', 'red', 'pink', 'yellow'];
 
-  Object.values(styleNodes)
-    .filter(({ document }) => document.name.includes("color"))
-    .forEach(({ document }) => {
-      const { opacity, color } = document.fills[0];
-      const { r, g, b } = color;
-      const hex = rgbaToHex(r * 255, g * 255, b * 255, opacity);
-      const colorNameArr = document.name.split("/").slice(1);
+  function toHexValue(fill) {
+    const { opacity, color } = fill;
+    const { r, g, b } = color;
+    const hex = rgbaToHex(r * 255, g * 255, b * 255, opacity);
+    return hex;
+  }
 
-      colors[colorNameArr[0]] = {
-        ...colors[colorNameArr[0]],
-        [colorNameArr[1]]: {
-          value: hex,
-        },
-      };
-    });
+  const colorTokens = Object.values(styleNodes)// TODO 相談　colorTokensという名前
+    .map(v => ({ name: v.document.name, value: v.document.fills[0] }))
+    .filter(v => colors.some(color => v.name.includes(color)))
+    .map(v => {
+      const _color = v.name.split('/');
+      const [color, level] = _color[_color.length - 1].split('-');
+      return {
+        color,
+        level,
+        value: toHexValue(v.value),
+      }
+    })
+
+  //参考：https://qiita.com/seira/items/5df10748fa35dd969681
+  const initialValue = {};// TODO 相談　これいるのかな？？
+
+  let colorTokensAdjust = colorTokens.reduce((prevValue, currentValue) => { // TODO 相談　colorTokensAdjustという名前
+  let key = currentValue.color; // keyにcolorTokens.colorを入れる
+
+    if (!prevValue[key]) {//prevValueのkeyが現在のkeyではなかったら // TODO 相談 ifの中身の書き方
+      prevValue[key] = {};//prevValueのkeyを連想配列にする
+    }
+    const { level,value } = currentValue; //level,valueの中にそれぞれcurrentValue.level,currentValue.valueを分割代入    
+    prevValue[key][level] = {value: value};// prevValue[key][level]にvalueというラベル、valueを入れる
+
+    return prevValue;
+  }, initialValue);
+  console.log(colorTokensAdjust);
 
   const colorContent = JSON.stringify({
     color: {
-      [PREFIX]: {
-        ...colors,
-      },
+        ...colorTokensAdjust
     },
   });
 

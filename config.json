@@ -13,6 +13,14 @@
           }
         }
       ]
+    },
+    "scss": {
+      "transformGroup": "scss",
+      "buildPath": "dist/",
+      "files": [{
+        "destination": "speeda-tokens.scss",
+        "format": "scss/variables"
+      }]
     }
   }
 }
