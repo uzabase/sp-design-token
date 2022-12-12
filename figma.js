@@ -63,25 +63,11 @@ const main = async () => {
     })
 
   //参考：https://qiita.com/seira/items/5df10748fa35dd969681
-  const initialValue = {};// TODO 相談　これいるのかな？？
+  //toColorTree
 
-  let colorTokensAdjust = colorTokens.reduce((prevValue, currentValue) => { // TODO 相談　colorTokensAdjustという名前
-  let key = currentValue.color; // keyにcolorTokens.colorを入れる
-
-    if (!prevValue[key]) {//prevValueのkeyが現在のkeyではなかったら // TODO 相談 ifの中身の書き方
-      prevValue[key] = {};//prevValueのkeyを連想配列にする
-    }
-    const { level,value } = currentValue; //level,valueの中にそれぞれcurrentValue.level,currentValue.valueを分割代入    
-    prevValue[key][level] = {value: value};// prevValue[key][level]にvalueというラベル、valueを入れる
-
-    return prevValue;
-  }, initialValue);
-  console.log(colorTokensAdjust);
 
   const colorContent = JSON.stringify({
-    color: {
-        ...colorTokensAdjust
-    },
+    color:toColorTree(colorTokens)
   });
 
   await writeFile(
@@ -90,6 +76,20 @@ const main = async () => {
   );
 
   console.log("DONE");
+};
+
+function toColorTree(colorTokens){
+  return colorTokens.reduce((prevValue, currentValue) => {
+      let key = currentValue.color; // keyにcolorTokens.colorを入れる 
+     
+      prevValue[key] = prevValue[key] ?? {}; // hoge[key] に hoge[key]を代入する。ただし、hoge[key]がnullの場合は {}を代入するという処理
+
+      const { level,value } = currentValue; //level,valueの中にそれぞれcurrentValue.level,currentValue.valueを分割代入    
+      prevValue[key][level] = {value: value};// prevValue[key][level]にvalueというラベル、valueを入れる
+  
+      return prevValue;
+    }, {});
+
 };
 
 main();
