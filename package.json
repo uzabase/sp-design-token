@@ -2,7 +2,7 @@
   "name": "wbpress-vol129-ch4-sample",
   "version": "1.0.0",
   "description": "Web DB PRESS Vol.129 第4章のサンプルコードです",
-  "main": "figma.js",
+  "main": "styles",
   "scripts": {
     "build:json": "node figma.js",
     "build:css": "style-dictionary build"
