@@ -7,6 +7,8 @@ const writeFile = promisify(fs.writeFile);
 
 const TOKEN = process.env.FIGMA_TOKEN;
 const FIGMA_FILE_KEY = process.env.FIGMA_DESIGN_FILE_KEY;
+//実行
+//FIGMA_TOKEN=figd_ORviOQdgbRblpnUgwLXIGoTJdb5EF5tECNX3zlV- FIGMA_DESIGN_FILE_KEY=Ab4vum8K7Bx4dhfq5XmPzc node figma.js
 
 const fetchFigma = (path) =>
   fetch(`https://api.figma.com/v1/files/${FIGMA_FILE_KEY}${path}`, {
@@ -27,6 +29,8 @@ const rgbaToHex = (r, g, b, a) => {
 
   return "#" + hr + hg + hb + ha;
 };
+
+console.log("ここまできてる");
 
 const main = async () => {
   // Get styles value

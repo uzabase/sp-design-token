@@ -3,7 +3,7 @@
   "platforms": {
     "css": {
       "transformGroup": "css",
-      "buildPath": "styles/",
+      "buildPath": "../styles/",
       "files": [
         {
           "destination": "speeda-tokens.css",
@@ -16,7 +16,7 @@
     },
     "scss": {
       "transformGroup": "scss",
-      "buildPath": "styles/",
+      "buildPath": "../styles/",
       "files": [{
         "destination": "speeda-tokens.scss",
         "format": "scss/variables"
