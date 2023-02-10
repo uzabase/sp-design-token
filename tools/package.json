@@ -1,6 +1,7 @@
 {
   "name": "sp-design-token-lib",
   "description": "SPEEDA Design system",
+  "version": "0.3.0",
   "main": "styles",
   "scripts": {
     "build:json": "node figma.js",
