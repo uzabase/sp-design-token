@@ -5,8 +5,7 @@ module.exports = {
       return "\n// Do not edit directly\n// Generated on " + new Date().toUTCString() + "\n\n" +
           'export const colors = {\n' +
           dictionary.allProperties.map(function(prop) {
-            // console.log(prop.path)
-            let to_ret_prop = '"' +prop.path.join('-') + '": "' + prop.value + '",';
+            let to_ret_prop = prop.path.join('_') + ': "' + prop.value + '",';
             if (prop.comment)
               to_ret_prop = to_ret_prop.concat(' // ' + prop.comment);
             return to_ret_prop;
