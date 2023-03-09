@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "vue": "^3.2.45",
-    "sp-design-token-lib": "git+ssh://git@bitbucket.org:uzabase/sp-design-token-lib.git#0.1.0"
+    "@sp-design/token": "git+ssh://git@bitbucket.org:uzabase/sp-design-token.git#0.5.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.0.0",
