@@ -1,6 +1,6 @@
 {
   "name": "@sp-design/token",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "SPEEDA Design system tokens",
   "main": "styles",
   "directories": {
@@ -13,6 +13,9 @@
     "type": "git",
     "url": "git+ssh://git@bitbucket.org/uzabase/sp-design-token.git"
   },
+  "files": [
+    "styles"
+  ],
   "author": "Hazuki Okuda,Tsunaki Okubo",
   "license": "UNLICENSED",
   "homepage": "https://bitbucket.org/uzabase/sp-design-token#readme"
