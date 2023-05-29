@@ -6,10 +6,11 @@ const fetch = (...args) =>
 const writeFile = promisify(fs.writeFile);
 
 const TOKEN = process.env.FIGMA_TOKEN;
-const FIGMA_FILE_KEY = process.env.FIGMA_DESIGN_FILE_KEY;
+const PRIMITIVE_FIGMA_FILE_KEY = process.env.PRIMITIVE_FIGMA_DESIGN_FILE_KEY;
+const SEMANTIC_FIGMA_FILE_KEY = process.env.SEMANTIC_FIGMA_DESIGN_FILE_KEY;
 
-const fetchFigma = (path) =>
-  fetch(`https://api.figma.com/v1/files/${FIGMA_FILE_KEY}${path}`, {
+const fetchFigma = (path, figmaFileKey) =>
+  fetch(`https://api.figma.com/v1/files/${figmaFileKey}${path}`, {
     headers: {
       "X-FIGMA-TOKEN": TOKEN,
     },
@@ -28,46 +29,76 @@ const rgbaToHex = (r, g, b, a) => {
   return "#" + hr + hg + hb + ha;
 };
 
-const main = async () => {
-  // Get styles value
-  const responseStyles = await fetchFigma("/styles");
+function toHexValue(fill) {
+  const { opacity, color } = fill;
+  const { r, g, b } = color;
+  const hex = rgbaToHex(r * 255, g * 255, b * 255, opacity);
+  return hex;
+}
+async function getStyleNodes(figmaFileKey) {
+  const responseStyles = await fetchFigma("/styles", figmaFileKey);
   const styles = responseStyles.meta.styles;
 
   const styleNodeIds = styles.map((style) => style.node_id);
   const styleNodeIdsQuery = styleNodeIds.join(",");
   const { nodes: styleNodes } = await fetchFigma(
-    `/nodes?ids=${styleNodeIdsQuery}`
+    `/nodes?ids=${styleNodeIdsQuery}`,
+    figmaFileKey
   );
+  return styleNodes;
+}
 
-  // Generate color tokens
-  const colors = ['black', 'gray', 'blue', 'green', 'red', 'pink', 'yellow'];
+function toColorTree(colorTokens) {
+  return colorTokens.reduce((prevValue, currentValue) => {
+    let color = currentValue.color;
+    prevValue[color] = prevValue[color] ?? {};
+    prevValue[color] = { value: currentValue.value };
 
-  function toHexValue(fill) {
-    const { opacity, color } = fill;
-    const { r, g, b } = color;
-    const hex = rgbaToHex(r * 255, g * 255, b * 255, opacity);
-    return hex;
-  }
+    let pairs = Object.entries(prevValue);
+    pairs.sort(function (p1, p2) {
+      let p1Key = p1[0],
+        p2Key = p2[0];
+      if (p1Key < p2Key) {
+        return -1;
+      }
+      if (p1Key > p2Key) {
+        return 1;
+      }
+      return 0;
+    });
+    prevValue = Object.fromEntries(pairs);
+    return prevValue;
+  }, {});
+}
 
-  const colorTokens = Object.values(styleNodes)// TODO 相談　colorTokensという名前
-    .map(v => ({ name: v.document.name, value: v.document.fills[0] }))
-    .filter(v => colors.some(color => v.name.includes(color)))
-    .map(v => {
-      const _color = v.name.split('/');
-      const [color, level] = _color[_color.length - 1].split('-');
+const main = async () => {
+  let primitiveColorTokens = await getStyleNodes(PRIMITIVE_FIGMA_FILE_KEY);
+  primitiveColorTokens = Object.values(primitiveColorTokens)
+    .map((v) => ({ name: v.document.name, value: v.document.fills[0] }))
+    .map((v) => {
+      const _color = v.name.split("/");
+      const colorNumber = _color[1].split("-")[1];
+      const color = ("primitive-" + _color[0] + "-" + colorNumber).trim();
       return {
         color,
-        level,
         value: toHexValue(v.value),
-      }
-    })
+      };
+    });
 
-  //参考：https://qiita.com/seira/items/5df10748fa35dd969681
-  //toColorTree
-
+  let semanticColorTokens = await getStyleNodes(SEMANTIC_FIGMA_FILE_KEY);
+  semanticColorTokens = Object.values(semanticColorTokens)
+    .map((v) => ({ name: v.document.name, value: v.document.fills[0] }))
+    .map((v) => {
+      const _color = v.name.split("/");
+      const color = "semantic-" + _color.join("-").trim();
+      return {
+        color,
+        value: toHexValue(v.value),
+      };
+    });
 
   const colorContent = JSON.stringify({
-    color:toColorTree(colorTokens)
+    color: toColorTree(primitiveColorTokens.concat(semanticColorTokens)),
   });
 
   await writeFile(
@@ -76,20 +107,6 @@ const main = async () => {
   );
 
   console.log("DONE");
-};
-
-function toColorTree(colorTokens){
-  return colorTokens.reduce((prevValue, currentValue) => {
-      let key = currentValue.color; // keyにcolorTokens.colorを入れる 
-     
-      prevValue[key] = prevValue[key] ?? {}; // hoge[key] に hoge[key]を代入する。ただし、hoge[key]がnullの場合は {}を代入するという処理
-
-      const { level,value } = currentValue; //level,valueの中にそれぞれcurrentValue.level,currentValue.valueを分割代入    
-      prevValue[key][level] = {value: value};// prevValue[key][level]にvalueというラベル、valueを入れる
-  
-      return prevValue;
-    }, {});
-
 };
 
 main();

@@ -1,13 +1,15 @@
 {
   "scripts": {
     "build:json": "node figma.js",
-    "build:css": "style-dictionary build"
+    "build:css": "style-dictionary build",
+    "format": "prettier --write '*.{ts,js}'"
   },
   "author": "Hazuki Okuda,Tsunaki Okubo",
   "license": "UNLICENSED",
   "private": true,
   "devDependencies": {
     "node-fetch": "^3.2.4",
+    "prettier": "^2.8.8",
     "style-dictionary": "^3.7.0"
   }
 }
