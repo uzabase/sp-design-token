@@ -1,6 +1,6 @@
 
 // Do not edit directly
-// Generated on Fri, 26 May 2023 10:15:43 GMT
+// Generated on Wed, 07 Jun 2023 07:17:04 GMT
 
 $color-primitive-amber-30: #e5d4c0;
 $color-primitive-amber-50: #d4b797;
@@ -133,6 +133,7 @@ $color-semantic-border-button-text-hover: #f5f5f5;
 $color-semantic-border-check-unchecked: #cbcbcb;
 $color-semantic-border-error: #ca3232;
 $color-semantic-border-infomation: #3978bf;
+$color-semantic-border-inverse: #ffffff;
 $color-semantic-border-regular: #e5e5e5;
 $color-semantic-border-selected: #404fbf;
 $color-semantic-border-selected-focus: #404fbf;
@@ -212,8 +213,9 @@ $color-semantic-chart-single-8: #d6e3ff;
 $color-semantic-elevation-modal: rgba(25, 25, 25, 0.2);
 $color-semantic-elevation-regular: rgba(25, 25, 25, 0.2);
 $color-semantic-elevation-sort: rgba(25, 25, 25, 0.2);
-$color-semantic-highlight-focus-ring: #e2e5f5;
-$color-semantic-highlight-text-highlight: #ffe7ec;
+$color-semantic-highlight-focus-ring-default: #e2e5f5;
+$color-semantic-highlight-focus-ring-error: #f7e0e0;
+$color-semantic-highlight-text: #ffe7ec;
 $color-semantic-surface-temp-tag-darkgreen: #1a7037;
 $color-semantic-surface-temp-tag-darkmarine: #3978bf;
 $color-semantic-surface-temp-tag-darkred: #ca3232;
@@ -249,7 +251,6 @@ $color-semantic-surface-check-disabled: #ededed;
 $color-semantic-surface-checked: #f2f2f9;
 $color-semantic-surface-error: #faebeb;
 $color-semantic-surface-infomation: #ebf2f9;
-$color-semantic-surface-notice-badge: #ff5e83;
 $color-semantic-surface-regular-1: #ffffff;
 $color-semantic-surface-regular-2: #f8f8f8;
 $color-semantic-surface-regular-3: #f5f5f5;
@@ -257,8 +258,10 @@ $color-semantic-surface-regular-4: #ededed;
 $color-semantic-surface-regular-5: #e5e5e5;
 $color-semantic-surface-regular-6: #cbcbcb;
 $color-semantic-surface-regular-7: #363636;
-$color-semantic-surface-regular-8: #191919;
+$color-semantic-surface-regular-8: #282828;
+$color-semantic-surface-regular-9: #191919;
 $color-semantic-surface-selected: #404fbf;
+$color-semantic-surface-selected-focus: #404fbf;
 $color-semantic-surface-selected-hover: #5361c5;
 $color-semantic-surface-success: #e8f1eb;
 $color-semantic-surface-warning: #fdf7e6;
@@ -290,6 +293,7 @@ $color-semantic-text-button-text-hover: #191919;
 $color-semantic-text-current: #404fbf;
 $color-semantic-text-disable: #cbcbcb;
 $color-semantic-text-error: #ca3232;
+$color-semantic-text-heading-inverse: #ffffff;
 $color-semantic-text-heading-regular: #191919;
 $color-semantic-text-heading-semi-weak: #7f7f7f;
 $color-semantic-text-inverse: #ffffff;
