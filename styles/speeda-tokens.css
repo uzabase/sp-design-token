@@ -1,11 +1,10 @@
 /**
  * Do not edit directly
- * Generated on Wed, 07 Jun 2023 07:17:04 GMT
+ * Generated on Thu, 22 Jun 2023 06:52:25 GMT
  */
 
 :root {
   --color-semantic-text-text-link: #404fbf;
-  --color-semantic-text-selected: #404fbf;
   --color-semantic-text-required: #ca3232;
   --color-semantic-text-placeholder: #7f7f7f;
   --color-semantic-text-inverse: #ffffff;
@@ -13,7 +12,7 @@
   --color-semantic-text-heading-regular: #191919;
   --color-semantic-text-heading-inverse: #ffffff;
   --color-semantic-text-error: #ca3232;
-  --color-semantic-text-disable: #cbcbcb;
+  --color-semantic-text-disabled: #cbcbcb;
   --color-semantic-text-current: #404fbf;
   --color-semantic-text-button-text-hover: #191919;
   --color-semantic-text-button-text-focus: #191919;
@@ -36,12 +35,14 @@
   --color-semantic-text-button-fill-destructive-focus: #ffffff;
   --color-semantic-text-button-fill-destructive-default: #ffffff;
   --color-semantic-text-button-fill-default: #ffffff;
-  --color-semantic-text-button-disable: #cbcbcb;
+  --color-semantic-text-button-disabled: #cbcbcb;
   --color-semantic-text-body-weak: #7f7f7f;
   --color-semantic-text-body-semi-weak: #363636;
   --color-semantic-text-body-regular: #191919;
-  --color-semantic-surface-warning: #fdf7e6;
-  --color-semantic-surface-success: #e8f1eb;
+  --color-semantic-surface-warning-3: #f9e8b3;
+  --color-semantic-surface-warning-1: #fdf7e6;
+  --color-semantic-surface-success-3: #bad4c3;
+  --color-semantic-surface-success-1: #e8f1eb;
   --color-semantic-surface-selected-hover: #5361c5;
   --color-semantic-surface-selected-focus: #404fbf;
   --color-semantic-surface-selected: #404fbf;
@@ -54,24 +55,26 @@
   --color-semantic-surface-regular-3: #f5f5f5;
   --color-semantic-surface-regular-2: #f8f8f8;
   --color-semantic-surface-regular-1: #ffffff;
-  --color-semantic-surface-infomation: #ebf2f9;
-  --color-semantic-surface-error: #faebeb;
+  --color-semantic-surface-information-3: #c4d7ec;
+  --color-semantic-surface-information-1: #ebf2f9;
+  --color-semantic-surface-error-3: #efc2c2;
+  --color-semantic-surface-error-1: #faebeb;
   --color-semantic-surface-checked: #f2f2f9;
   --color-semantic-surface-check-disabled: #ededed;
   --color-semantic-surface-button-text-hover: #f5f5f5;
   --color-semantic-surface-button-text-focus: #f5f5f5;
   --color-semantic-surface-button-text-destructive-hover: #f4d6d6;
   --color-semantic-surface-button-text-destructive-focus: #f4d6d6;
-  --color-semantic-surface-button-text-destructive-default: #ca3232;
-  --color-semantic-surface-button-text-default: #191919;
+  --color-semantic-surface-button-text-destructive-default: rgba(202, 50, 50, 0);
+  --color-semantic-surface-button-text-default: rgba(25, 25, 25, 0);
   --color-semantic-surface-button-selected-hover: #5361c5;
   --color-semantic-surface-button-selected: #404fbf;
-  --color-semantic-surface-button-outlone-default: #191919;
-  --color-semantic-surface-button-outline-hover: #191919;
-  --color-semantic-surface-button-outline-focus: #191919;
-  --color-semantic-surface-button-outline-destructive-hover: #da7070;
-  --color-semantic-surface-button-outline-destructive-focus: #da7070;
-  --color-semantic-surface-button-outline-destructive-default: #ca3232;
+  --color-semantic-surface-button-outline-hover: rgba(25, 25, 25, 0);
+  --color-semantic-surface-button-outline-focus: rgba(25, 25, 25, 0);
+  --color-semantic-surface-button-outline-destructive-hover: rgba(218, 112, 112, 0);
+  --color-semantic-surface-button-outline-destructive-focus: rgba(218, 112, 112, 0);
+  --color-semantic-surface-button-outline-destructive-default: rgba(202, 50, 50, 0);
+  --color-semantic-surface-button-outline-default: rgba(25, 25, 25, 0);
   --color-semantic-surface-button-loading: #f8f8f8;
   --color-semantic-surface-button-fill-hover: #363636;
   --color-semantic-surface-button-fill-focus: #363636;
@@ -79,7 +82,7 @@
   --color-semantic-surface-button-fill-destructive-focus: #d55b5b;
   --color-semantic-surface-button-fill-destructive-default: #ca3232;
   --color-semantic-surface-button-fill-default: #191919;
-  --color-semantic-surface-button-disable: #f8f8f8;
+  --color-semantic-surface-button-disabled: #f8f8f8;
   --color-semantic-surface-temp-tag-yellow: #fdf7e6;
   --color-semantic-surface-temp-tag-red: #faebeb;
   --color-semantic-surface-temp-tag-marine: #ebf2f9;
@@ -179,8 +182,8 @@
   --color-semantic-border-button-text-focus: #f5f5f5;
   --color-semantic-border-button-text-destructive-hover: #f4d6d6;
   --color-semantic-border-button-text-destructive-focus: #f4d6d6;
-  --color-semantic-border-button-text-destructive-default: #ca3232;
-  --color-semantic-border-button-text-default: #191919;
+  --color-semantic-border-button-text-destructive-default: rgba(202, 50, 50, 0);
+  --color-semantic-border-button-text-default: rgba(25, 25, 25, 0);
   --color-semantic-border-button-selected-hover: #5361c5;
   --color-semantic-border-button-selected: #404fbf;
   --color-semantic-border-button-outline-hover: #7f7f7f;
@@ -196,7 +199,7 @@
   --color-semantic-border-button-fill-destructive-focus: #d55b5b;
   --color-semantic-border-button-fill-destructive-default: #ca3232;
   --color-semantic-border-button-fill-default: #191919;
-  --color-semantic-border-button-disable: #e5e5e5;
+  --color-semantic-border-button-disabled: #e5e5e5;
   --color-semantic-border-temp-tag-yellow: #f7e099;
   --color-semantic-border-temp-tag-red: #eaadad;
   --color-semantic-border-temp-tag-marine: #b0c9e5;

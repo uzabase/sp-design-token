@@ -20,7 +20,7 @@ const rgbaToHex = (r, g, b, a) => {
   const hr = Math.round(r).toString(16).padStart(2, "0");
   const hg = Math.round(g).toString(16).padStart(2, "0");
   const hb = Math.round(b).toString(16).padStart(2, "0");
-  const ha = !a
+  const ha = typeof a === "undefined"
     ? ""
     : Math.round(a * 255)
         .toString(16)
