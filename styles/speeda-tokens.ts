@@ -1,6 +1,6 @@
 
 // Do not edit directly
-// Generated on Thu, 22 Jun 2023 06:52:25 GMT
+// Generated on Tue, 27 Jun 2023 05:57:28 GMT
 
 export const colors = {
 color_primitive_amber_30: "#e5d4c0",
@@ -133,11 +133,11 @@ color_semantic_border_button_text_focus: "#f5f5f5",
 color_semantic_border_button_text_hover: "#f5f5f5",
 color_semantic_border_check_unchecked: "#cbcbcb",
 color_semantic_border_error: "#ca3232",
-color_semantic_border_infomation: "#3978bf",
+color_semantic_border_focus: "#404fbf",
+color_semantic_border_information: "#3978bf",
 color_semantic_border_inverse: "#ffffff",
 color_semantic_border_regular: "#e5e5e5",
 color_semantic_border_selected: "#404fbf",
-color_semantic_border_selected_focus: "#404fbf",
 color_semantic_border_selected_hover: "#5361c5",
 color_semantic_border_semi_strong: "#363636",
 color_semantic_border_semi_weak: "#ededed",
@@ -250,6 +250,7 @@ color_semantic_surface_button_text_focus: "#f5f5f5",
 color_semantic_surface_button_text_hover: "#f5f5f5",
 color_semantic_surface_check_disabled: "#ededed",
 color_semantic_surface_checked: "#f2f2f9",
+color_semantic_surface_checked_hover: "#d9dcf2",
 color_semantic_surface_error_1: "#faebeb",
 color_semantic_surface_error_3: "#efc2c2",
 color_semantic_surface_information_1: "#ebf2f9",
@@ -298,7 +299,6 @@ color_semantic_text_button_text_hover: "#191919",
 color_semantic_text_current: "#404fbf",
 color_semantic_text_disabled: "#cbcbcb",
 color_semantic_text_error: "#ca3232",
-color_semantic_text_heading_inverse: "#ffffff",
 color_semantic_text_heading_regular: "#191919",
 color_semantic_text_heading_semiWeak: "#7f7f7f",
 color_semantic_text_inverse: "#ffffff",
