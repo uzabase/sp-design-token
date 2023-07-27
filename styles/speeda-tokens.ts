@@ -1,6 +1,6 @@
 
 // Do not edit directly
-// Generated on Tue, 27 Jun 2023 05:57:28 GMT
+// Generated on Wed, 26 Jul 2023 14:11:36 GMT
 
 export const colors = {
 color_primitive_amber_30: "#e5d4c0",
@@ -10,6 +10,7 @@ color_primitive_bamboo_50: "#9bc28c",
 color_primitive_blue_10: "#f2f2f9",
 color_primitive_blue_100: "#404fbf",
 color_primitive_blue_15: "#e2e5f5",
+color_primitive_blue_20: "#d9dcf2",
 color_primitive_blue_30: "#c6caec",
 color_primitive_blue_50: "#a0a7df",
 color_primitive_blue_60: "#8c95d9",
@@ -52,6 +53,7 @@ color_primitive_neutral_40: "#e5e5e5",
 color_primitive_neutral_50: "#cbcbcb",
 color_primitive_neutral_70: "#7f7f7f",
 color_primitive_neutral_80: "#363636",
+color_primitive_neutral_90: "#282828",
 color_primitive_pink_100: "#ff5e83",
 color_primitive_pink_15: "#ffe7ec",
 color_primitive_plum_100: "#b3308a",
@@ -63,6 +65,7 @@ color_primitive_purple_50: "#cc9ee3",
 color_primitive_red_10: "#faebeb",
 color_primitive_red_100: "#ca3232",
 color_primitive_red_130: "#8d2323",
+color_primitive_red_15: "#f7e0e0",
 color_primitive_red_20: "#f4d6d6",
 color_primitive_red_30: "#efc2c2",
 color_primitive_red_40: "#eaadad",

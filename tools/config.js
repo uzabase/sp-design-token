@@ -44,6 +44,9 @@ module.exports = {
         {
           destination: "speeda-tokens.scss",
           format: "scss/variables",
+          options: {
+            outputReferences: true,
+          },
         },
       ],
     },
