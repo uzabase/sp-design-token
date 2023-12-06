@@ -1,6 +1,6 @@
 
 // Do not edit directly
-// Generated on Wed, 26 Jul 2023 14:11:36 GMT
+// Generated on Tue, 05 Dec 2023 06:06:47 GMT
 
 export const colors = {
 color_primitive_amber_30: "#e5d4c0",
@@ -308,4 +308,6 @@ color_semantic_text_inverse: "#ffffff",
 color_semantic_text_placeholder: "#7f7f7f",
 color_semantic_text_required: "#ca3232",
 color_semantic_text_textLink: "#404fbf",
+font_ja: "Arial, Helvetica, Hiragino Kaku Gothic ProN, 'Osaka', 'メイリオ', 'Meiryo', 'ＭＳ Ｐゴシック', 'MS P Gothic', sans-serif",
+font_zh: "Arial, Helvetica, 'PingFang SC', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif",
 }

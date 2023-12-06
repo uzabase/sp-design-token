@@ -1,9 +1,11 @@
 /**
  * Do not edit directly
- * Generated on Wed, 26 Jul 2023 14:11:36 GMT
+ * Generated on Tue, 05 Dec 2023 06:06:47 GMT
  */
 
 :root {
+  --font-zh: Arial, Helvetica, 'PingFang SC', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
+  --font-ja: Arial, Helvetica, Hiragino Kaku Gothic ProN, 'Osaka', 'メイリオ', 'Meiryo', 'ＭＳ Ｐゴシック', 'MS P Gothic', sans-serif;
   --color-semantic-surface-button-text-destructive-default: rgba(202, 50, 50, 0);
   --color-semantic-surface-button-text-default: rgba(25, 25, 25, 0);
   --color-semantic-surface-button-outline-hover: rgba(25, 25, 25, 0);

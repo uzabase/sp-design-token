@@ -5,8 +5,6 @@
 
 # Node artifact files
 node_modules/
-dist/
-tokens/
 
 # Compiled Java class files
 *.class
@@ -49,4 +47,5 @@ Thumbs.db
 *.mov
 *.wmv
 
+tools/tokens/color/
 tools/figma.js

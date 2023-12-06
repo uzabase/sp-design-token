@@ -1,0 +1,10 @@
+{
+  "font": {
+    "ja": {
+      "value": "Arial, Helvetica, Hiragino Kaku Gothic ProN, 'Osaka', 'メイリオ', 'Meiryo', 'ＭＳ Ｐゴシック', 'MS P Gothic', sans-serif"
+    },
+    "zh": {
+      "value": "Arial, Helvetica, 'PingFang SC', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif"
+    }
+  }
+}

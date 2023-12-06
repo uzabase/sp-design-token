@@ -1,6 +1,6 @@
 {
   "name": "@sp-design/token",
-  "version": "4.2.2",
+  "version": "4.3.0",
   "description": "SPEEDA Design system tokens",
   "main": "styles",
   "directories": {
