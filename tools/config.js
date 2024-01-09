@@ -26,7 +26,7 @@ module.exports = {
   platforms: {
     css: {
       transformGroup: "css",
-      buildPath: "../styles/",
+      buildPath: "../lib/",
       files: [
         {
           destination: "speeda-tokens.css",
@@ -39,7 +39,7 @@ module.exports = {
     },
     scss: {
       transformGroup: "scss",
-      buildPath: "../styles/",
+      buildPath: "../lib/",
       files: [
         {
           destination: "speeda-tokens.scss",
@@ -51,7 +51,7 @@ module.exports = {
       ],
     },
     typeScript: {
-      buildPath: "../styles/",
+      buildPath: "../lib/",
       files: [
         {
           destination: "speeda-tokens.ts",
