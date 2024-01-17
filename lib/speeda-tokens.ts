@@ -1,6 +1,6 @@
 
 // Do not edit directly
-// Generated on Mon, 01 Jan 2024 13:17:16 GMT
+// Generated on Wed, 17 Jan 2024 02:11:07 GMT
 
 export const colors = {
 color_primitive_amber_30: "#e5d4c0",
@@ -217,8 +217,8 @@ color_semantic_chart_single_8: "#d6e3ff",
 color_semantic_elevation_modal: "#19191933",
 color_semantic_elevation_regular: "#19191933",
 color_semantic_elevation_sort: "#19191933",
-color_semantic_highlight_focusRing_default: "#e2e5f5",
-color_semantic_highlight_focusRing_error: "#f7e0e0",
+color_semantic_highlight_focus_ring_default: "#e2e5f5",
+color_semantic_highlight_focus_ring_error: "#f7e0e0",
 color_semantic_highlight_text: "#ffe7ec",
 color_semantic_surface__temp_tag_darkgreen: "#1a7037",
 color_semantic_surface__temp_tag_darkmarine: "#3978bf",
@@ -275,7 +275,7 @@ color_semantic_surface_success_3: "#bad4c3",
 color_semantic_surface_warning_1: "#fdf7e6",
 color_semantic_surface_warning_3: "#f9e8b3",
 color_semantic_text_body_regular: "#191919",
-color_semantic_text_body_semiWeak: "#363636",
+color_semantic_text_body_semi_weak: "#363636",
 color_semantic_text_body_weak: "#7f7f7f",
 color_semantic_text_button_disabled: "#cbcbcb",
 color_semantic_text_button_fill_default: "#ffffff",
@@ -303,11 +303,11 @@ color_semantic_text_current: "#404fbf",
 color_semantic_text_disabled: "#cbcbcb",
 color_semantic_text_error: "#ca3232",
 color_semantic_text_heading_regular: "#191919",
-color_semantic_text_heading_semiWeak: "#7f7f7f",
+color_semantic_text_heading_semi_weak: "#7f7f7f",
 color_semantic_text_inverse: "#ffffff",
 color_semantic_text_placeholder: "#7f7f7f",
 color_semantic_text_required: "#ca3232",
-color_semantic_text_textLink: "#404fbf",
+color_semantic_text_text_link: "#404fbf",
 font_ja: "Arial, Helvetica, Hiragino Kaku Gothic ProN, 'Osaka', 'メイリオ', 'Meiryo', 'ＭＳ Ｐゴシック', 'MS P Gothic', sans-serif",
 font_zh: "Arial, Helvetica, 'PingFang SC', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif",
 }
