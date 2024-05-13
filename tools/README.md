@@ -13,6 +13,7 @@ https://www.figma.com/file/3mt6U3oD9grrd7YzYm2cdu/
 
 # 実行方法
 
+
 ## Style Dictionary用のJSONファイルを生成
 
 ```bash
