@@ -16,12 +16,11 @@ https://www.figma.com/file/3mt6U3oD9grrd7YzYm2cdu/
 ## Style Dictionary用のJSONファイルを生成
 
 ```bash
-$ FIGMA_TOKEN=*** FIGMA_DESIGN_FILE_KEY=*** node figma.js
+$  npx tsc figma.ts && FIGMA_TOKEN=*** PRIMITIVE_FIGMA_DESIGN_FILE_KEY=*** SEMANTIC_FIGMA_DESIGN_FILE_KEY=*** node figma.js
 ```
-
-`FIGMA_TOKEN` にはFigmaアカウントの「Settings」にある「Personal access tokens」から取得して入れてください。
-
-`FIGMA_DESIGN_FILE_KEY` には複製したFigmaファイルのURLにある文字列を入れてください。
+npx tsc figma.tsでtsをjsにコンパイルします。 figma.jsが生成されていることを確認してください。  
+`FIGMA_TOKEN` にはFigmaアカウントの「Settings」にある「Personal access tokens」から取得して入れてください。  
+`PRIMITIVE_FIGMA_DESIGN_FILE_KEY`,`SEMANTIC_FIGMA_DESIGN_FILE_KEY`にはFigmaファイルのURLにある文字列を入れてください。
 
 ```
 https://www.figma.com/file/%この部分の文字列%/
