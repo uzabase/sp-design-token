@@ -6,11 +6,22 @@ module.exports = {
         "\n// Do not edit directly\n// Generated on " +
         new Date().toUTCString() +
         "\n\n" +
-        "export const colors = {\n" +
+        "export const spTokenTypes = [\n" +
+        dictionary.allProperties
+          .map(
+            (prop) =>
+              '"' +
+              prop.path.join("_").replaceAll("-", "_").replaceAll("__", "_") +
+              '",'
+          )
+          .join("\n") +
+        "\n] as const;\n" +
+        "export type SpTokenTypes = (typeof spTokenTypes)[number];\n\n" +
+        "export const tokens: {[key in SpTokenTypes]:string} = {\n" +
         dictionary.allProperties
           .map(function (prop) {
             let to_ret_prop =
-              prop.path.join("_").replace(/-/g, "_") +
+              prop.path.join("_").replaceAll("-", "_").replaceAll("__", "_") +
               ': "' +
               prop.value +
               '",';
@@ -32,6 +43,20 @@ module.exports = {
           destination: "speeda-tokens.css",
           format: "css/variables",
           options: {
+            outputReferences: true,
+          },
+        },
+      ],
+    },
+    cssHost: {
+      transformGroup: "css",
+      buildPath: "../lib/",
+      files: [
+        {
+          destination: "speeda-tokens-host.css",
+          format: "css/variables",
+          options: {
+            selector: ":host",
             outputReferences: true,
           },
         },
