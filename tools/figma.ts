@@ -152,10 +152,11 @@ function resolveColorVariable(
 }
 
 function toColorTree(colorTokens: ColorToken[]) {
+  const sortedColorTokens = [...colorTokens];
+  sortedColorTokens.sort((a, b) => a.color.localeCompare(b.color, "en"));
+
   return Object.fromEntries(
-    colorTokens
-      .toSorted((a, b) => a.color.localeCompare(b.color, "en"))
-      .map(({ color, value }) => [color, { value }])
+    sortedColorTokens.map(({ color, value }) => [color, { value }])
   );
 }
 
