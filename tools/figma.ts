@@ -180,6 +180,7 @@ const main = async () => {
     .map((variableId) =>
       findVariableById(variableId, primitiveLocalVariables.variables)
     )
+    .filter((variable) => !variable.remote)
     .map((variable) => {
       const resolvedVariable = resolveColorVariable(
         variable,
@@ -199,15 +200,18 @@ const main = async () => {
       };
     });
 
+  const allVariables = {
+    ...primitiveLocalVariables.variables,
+    ...semanticLocalVariables.variables,
+  };
+
   const semanticColorTokens = semanticColorCollection.variableIds
     .map((variableId) =>
       findVariableById(variableId, semanticLocalVariables.variables)
     )
+    .filter((variable) => !variable.remote)
     .map((variable) => {
-      const resolvedVariable = resolveColorVariable(variable, {
-        ...primitiveLocalVariables.variables,
-        ...semanticLocalVariables.variables,
-      });
+      const resolvedVariable = resolveColorVariable(variable, allVariables);
 
       const color = `semantic-${variable.name.split("/").join("-").trim()}`;
       const value = Object.values(resolvedVariable.valuesByMode)[0];
