@@ -134,14 +134,14 @@ function resolveColorVariable(
     throw new Error("変数の型がCOLORではありません");
   }
 
-  const valuesByMode = Object.values(variable.valuesByMode)[0];
+  const value = Object.values(variable.valuesByMode)[0];
 
-  if (!isVariableAlias(valuesByMode)) {
+  if (!isVariableAlias(value)) {
     return variable;
   }
 
   const referencedVariable = findVariableById(
-    valuesByMode.id,
+    value.id,
     referencedVariables
   );
   if (!referencedVariable) {
