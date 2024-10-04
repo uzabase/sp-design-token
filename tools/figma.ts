@@ -189,7 +189,11 @@ const main = async () => {
         primitiveLocalVariables.variables
       );
 
-      const color = `primitive-${variable.name.split("/").join("-").trim()}`;
+      const color = `primitive-${variable.name
+        .split("/")
+        .slice(1)
+        .join("-")
+        .trim()}`;
       const value = Object.values(resolvedVariable.valuesByMode)[0];
 
       return {
