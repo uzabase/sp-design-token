@@ -140,10 +140,7 @@ function resolveColorVariable(
     return variable;
   }
 
-  const referencedVariable = findVariableById(
-    value.id,
-    referencedVariables
-  );
+  const referencedVariable = findVariableById(value.id, referencedVariables);
   if (!referencedVariable) {
     throw new Error("参照先の変数が見つかりません");
   }
