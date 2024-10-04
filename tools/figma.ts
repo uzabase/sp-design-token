@@ -1,54 +1,99 @@
 import * as fs from "fs";
 import * as path from "path";
-import { promisify } from "util";
-
-const writeFile = promisify(fs.writeFile);
 
 const TOKEN = process.env.FIGMA_TOKEN;
 const PRIMITIVE_FIGMA_FILE_KEY = process.env.PRIMITIVE_FIGMA_DESIGN_FILE_KEY;
 const SEMANTIC_FIGMA_FILE_KEY = process.env.SEMANTIC_FIGMA_DESIGN_FILE_KEY;
 
-interface VARIABLE_ALIAS {
-  type: string;
-  id: string;
-}
-
-interface RGBA {
+interface Color {
   r: number;
   g: number;
   b: number;
   a: number;
 }
 
-type FigmaResponse = {
-  name: string;
-  key: string;
-  resolvedType: string;
-  remote: boolean;
-  valuesByMode: {
-    [id: string]: VARIABLE_ALIAS | RGBA;
-  };
-};
-
-type StyleDictionaryJson = {
-  kind?: "references" | "actual";
-  color: string;
-  value: string;
-};
-
-async function fetchFigma(path, figmaFileKey): Promise<FigmaResponse[]> {
-  const response: any = await fetch(
-    `https://api.figma.com/v1/files/${figmaFileKey}${path}`,
-    {
-      headers: {
-        "X-FIGMA-TOKEN": TOKEN,
-      },
-    }
-  ).then((response) => response.json());
-  return response.meta.variables;
+interface VariableAlias {
+  type: "VARIABLE_ALIAS";
+  id: string;
 }
 
-const rgbaToHex = (r, g, b, a) => {
+function isVariableAlias(value: Color | VariableAlias): value is VariableAlias {
+  return "type" in value && value.type === "VARIABLE_ALIAS";
+}
+
+type Variable = {
+  id: string;
+  name: string;
+  key: string;
+  variableCollectionId: string;
+  remote: boolean;
+  description: string;
+  hiddenFromPublishing: boolean;
+  scopes: unknown;
+  codeSyntax: unknown;
+} & (
+  | {
+      resolvedType: "COLOR";
+      valuesByMode: {
+        [modeId: string]: Color | VariableAlias;
+      };
+    }
+  | {
+      resolvedType: string;
+      valuesByMode: unknown;
+    }
+);
+
+interface Variables {
+  [variableId: string]: Variable;
+}
+
+interface VariableCollection {
+  id: string;
+  name: string;
+  key: string;
+  modes: [
+    {
+      modeId: string;
+      name: string;
+    }
+  ];
+  defaultModeId: string;
+  remote: boolean;
+  hiddenFromPublishing: boolean;
+  variableIds: string[];
+}
+
+interface VariableCollections {
+  [variableCollectionId: string]: VariableCollection;
+}
+
+interface LocalVariablesData {
+  variables: Variables;
+  variableCollections: VariableCollections;
+}
+
+interface LocalVariablesApiResponse {
+  status: number;
+  error: boolean;
+  meta: LocalVariablesData;
+}
+
+interface ColorToken {
+  color: string;
+  value: string;
+}
+
+async function fetchLocalVariables(fileKey: string) {
+  const url = `https://api.figma.com/v1/files/${fileKey}/variables/local`;
+  const headers = { "X-FIGMA-TOKEN": TOKEN };
+  const response: LocalVariablesApiResponse = await fetch(url, {
+    headers,
+  }).then((response) => response.json());
+  return response.meta;
+}
+
+function rgbaToHex(r: number, g: number, b: number, a: number) {
   const hr = Math.round(r).toString(16).padStart(2, "0");
   const hg = Math.round(g).toString(16).padStart(2, "0");
   const hb = Math.round(b).toString(16).padStart(2, "0");
@@ -60,99 +105,133 @@ const rgbaToHex = (r, g, b, a) => {
           .padStart(2, "0");
 
   return "#" + hr + hg + hb + ha;
-};
+}
 
-function toHexValue(obj) {
-  const { r, g, b, a } = obj;
+function toHexValue(color: Color) {
+  const { r, g, b, a } = color;
   const hex = rgbaToHex(r * 255, g * 255, b * 255, a);
   return hex;
 }
-async function getTokens(figmaFileKey: string): Promise<StyleDictionaryJson[]> {
-  const response = await fetchFigma("/variables/local", figmaFileKey);
-  const responseVariables = Object.values(response).filter(
-    (v) => v.resolvedType === "COLOR"
-  );
-  const remoteVariables = responseVariables.filter((v) => v.remote === true);
 
-  return Object.values(responseVariables)
-    .filter((v) => v.remote === false)
-    .map((v) => {
-      const valuesByMode = Object.values(v.valuesByMode)[0];
-      return {
-        kind: "type" in valuesByMode ? "references" : "actual",
-        color: v.name.split("/").join("-").trim(),
-        value:
-          "type" in valuesByMode
-            ? remoteVariables
-                .filter(
-                  (rv) => rv.key === valuesByMode.id.split(":")[1].split("/")[0]
-                )[0]
-                .name.split("/")
-                .join("-")
-                .trim()
-            : toHexValue(valuesByMode),
-      };
-    });
+function findVariableCollectionByName(
+  name: string,
+  variableCollections: VariableCollections
+) {
+  return Object.values(variableCollections).find(
+    (collection) => collection.name === name
+  );
 }
 
-function toColorTree(colorTokens) {
-  return colorTokens.reduce((prevValue, currentValue) => {
-    let color = currentValue.color;
-    prevValue[color] = prevValue[color] ?? {};
-    prevValue[color] = { value: currentValue.value };
+function findVariableById(id: string, variables: Variables) {
+  return Object.values(variables).find((variable) => variable.id === id);
+}
 
-    let pairs = Object.entries(prevValue);
-    pairs.sort(function (p1, p2) {
-      let p1Key = p1[0],
-        p2Key = p2[0];
-      if (p1Key < p2Key) {
-        return -1;
-      }
-      if (p1Key > p2Key) {
-        return 1;
-      }
-      return 0;
-    });
-    prevValue = Object.fromEntries(pairs);
-    return prevValue;
-  }, {});
+function resolveColorVariable(
+  variable: Variable,
+  referencedVariables: Variables
+): Variable {
+  if (variable.resolvedType !== "COLOR") {
+    throw new Error("変数の型がCOLORではありません");
+  }
+
+  const value = Object.values(variable.valuesByMode)[0];
+
+  if (!isVariableAlias(value)) {
+    return variable;
+  }
+
+  const referencedVariable = findVariableById(value.id, referencedVariables);
+  if (!referencedVariable) {
+    throw new Error("参照先の変数が見つかりません");
+  }
+
+  return resolveColorVariable(referencedVariable, referencedVariables);
+}
+
+function toColorTree(colorTokens: ColorToken[]) {
+  const sortedColorTokens = [...colorTokens];
+  sortedColorTokens.sort((a, b) => a.color.localeCompare(b.color, "en"));
+
+  return Object.fromEntries(
+    sortedColorTokens.map(({ color, value }) => [color, { value }])
+  );
 }
 
 const main = async () => {
-  let primitiveColorTokens = await getTokens(PRIMITIVE_FIGMA_FILE_KEY);
-  primitiveColorTokens = primitiveColorTokens.map((v) => {
-    let colorName = v.color.split("-");
-    colorName.shift();
-    return {
-      color: "primitive-" + colorName.join("-"),
-      value: v.value,
-    };
-  });
+  const primitiveLocalVariables = await fetchLocalVariables(
+    PRIMITIVE_FIGMA_FILE_KEY
+  );
 
-  let semanticColorTokens = await getTokens(SEMANTIC_FIGMA_FILE_KEY);
-  semanticColorTokens = semanticColorTokens.map((v) => {
-    let primitiveColorName: string[];
-    if (v.kind === "references") {
-      primitiveColorName = v.value.split("-");
-      primitiveColorName.shift();
-    }
-    return {
-      color: "semantic-" + v.color,
-      value:
-        v.kind === "references"
-          ? "{color.primitive-" + primitiveColorName.join("-") + "}"
-          : v.value,
-    };
-  });
+  const semanticLocalVariables = await fetchLocalVariables(
+    SEMANTIC_FIGMA_FILE_KEY
+  );
+
+  const uiPrimitiveColorCollection = findVariableCollectionByName(
+    "UI Primitive Color",
+    primitiveLocalVariables.variableCollections
+  );
+
+  const semanticColorCollection = findVariableCollectionByName(
+    "Semantic Color",
+    semanticLocalVariables.variableCollections
+  );
+
+  const primitiveColorTokens = uiPrimitiveColorCollection.variableIds
+    .map((variableId) =>
+      findVariableById(variableId, primitiveLocalVariables.variables)
+    )
+    .filter((variable) => !variable.remote)
+    .map((variable) => {
+      const resolvedVariable = resolveColorVariable(
+        variable,
+        primitiveLocalVariables.variables
+      );
+
+      const color = `primitive-${variable.name
+        .split("/")
+        .slice(1)
+        .join("-")
+        .trim()}`;
+      const value = Object.values(resolvedVariable.valuesByMode)[0];
+
+      return {
+        color,
+        value: toHexValue(value),
+      };
+    });
+
+  const allVariables = {
+    ...primitiveLocalVariables.variables,
+    ...semanticLocalVariables.variables,
+  };
+
+  const semanticColorTokens = semanticColorCollection.variableIds
+    .map((variableId) =>
+      findVariableById(variableId, semanticLocalVariables.variables)
+    )
+    .filter((variable) => !variable.remote)
+    .map((variable) => {
+      const resolvedVariable = resolveColorVariable(variable, allVariables);
+
+      const color = `semantic-${variable.name.split("/").join("-").trim()}`;
+      const value = Object.values(resolvedVariable.valuesByMode)[0];
+
+      return {
+        color,
+        value: toHexValue(value),
+      };
+    });
 
   const colorContent = JSON.stringify({
     color: toColorTree(primitiveColorTokens.concat(semanticColorTokens)),
   });
 
-  await writeFile(
-    path.resolve(__dirname, "tokens/color/base.json"),
-    colorContent
-  );
+  const outputDir = path.resolve(__dirname, "tokens/color");
+  if (!fs.existsSync(outputDir)) {
+    fs.mkdirSync(outputDir);
+  }
+
+  fs.writeFileSync(path.join(outputDir, "base.json"), colorContent);
 
   console.log("DONE");
 };
