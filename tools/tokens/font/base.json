@@ -1,10 +1,12 @@
 {
   "font": {
-    "ja": {
-      "value": "Arial, Helvetica, Hiragino Kaku Gothic ProN, 'Osaka', 'メイリオ', 'Meiryo', 'ＭＳ Ｐゴシック', 'MS P Gothic', sans-serif"
-    },
-    "zh": {
-      "value": "Arial, Helvetica, 'PingFang SC', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif"
+    "family": {
+      "ja": {
+        "value": "Arial, YakuHanJPs_Narrow, Hiragino Sans, Hiragino Kaku Gothic ProN, Meiryo, Noto Sans JP, sans-serif"
+      },
+      "zh": {
+        "value": "Arial, YakuHanJPs_Narrow, 'PingFang SC', 'Microsoft YaHei', 'PingFang TC', Microsoft JhengHei, sans-serif"
+      }
     }
   }
 }

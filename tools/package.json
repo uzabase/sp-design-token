@@ -2,7 +2,7 @@
   "scripts": {
     "build:json": "node figma.js",
     "build:css": "style-dictionary build",
-    "format": "prettier --write '*.{ts,js}'"
+    "format": "prettier --write '*.{ts,js,json}'"
   },
   "author": "Hazuki Okuda,Tsunaki Okubo",
   "license": "UNLICENSED",

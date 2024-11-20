@@ -1,11 +1,11 @@
 /**
  * Do not edit directly
- * Generated on Fri, 04 Oct 2024 12:46:08 GMT
+ * Generated on Wed, 20 Nov 2024 08:34:51 GMT
  */
 
 :root {
-  --font-zh: Arial, Helvetica, 'PingFang SC', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
-  --font-ja: Arial, Helvetica, Hiragino Kaku Gothic ProN, 'Osaka', 'メイリオ', 'Meiryo', 'ＭＳ Ｐゴシック', 'MS P Gothic', sans-serif;
+  --font-family-zh: Arial, YakuHanJPs_Narrow, 'PingFang SC', 'Microsoft YaHei', 'PingFang TC', Microsoft JhengHei, sans-serif;
+  --font-family-ja: Arial, YakuHanJPs_Narrow, Hiragino Sans, Hiragino Kaku Gothic ProN, Meiryo, Noto Sans JP, sans-serif;
   --color-semantic-text-weak: #6f6f6f;
   --color-semantic-text-text-link: #404fbf;
   --color-semantic-text-semi-weak: #363636;

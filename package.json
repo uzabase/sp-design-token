@@ -1,6 +1,6 @@
 {
   "name": "@sp-design/token",
-  "version": "8.0.0",
+  "version": "9.0.0",
   "description": "SPEEDA Design system tokens",
   "main": "lib",
   "directories": {
@@ -22,5 +22,8 @@
   "homepage": "https://bitbucket.org/uzabase/sp-design-token#readme",
   "devDependencies": {
     "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "yakuhanjp": "^4.1.1"
   }
 }
