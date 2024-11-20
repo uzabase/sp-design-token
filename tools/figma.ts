@@ -31,6 +31,7 @@ type Variable = {
   hiddenFromPublishing: boolean;
   scopes: unknown;
   codeSyntax: unknown;
+  deletedButReferenced?: boolean;
 } & (
   | {
       resolvedType: "COLOR";
@@ -180,6 +181,7 @@ const main = async () => {
     .map((variableId) =>
       findVariableById(variableId, primitiveLocalVariables.variables)
     )
+    .filter((variable) => !variable.deletedButReferenced)
     .filter((variable) => !variable.remote)
     .map((variable) => {
       const resolvedVariable = resolveColorVariable(
@@ -209,6 +211,7 @@ const main = async () => {
     .map((variableId) =>
       findVariableById(variableId, semanticLocalVariables.variables)
     )
+    .filter((variable) => !variable.deletedButReferenced)
     .filter((variable) => !variable.remote)
     .map((variable) => {
       const resolvedVariable = resolveColorVariable(variable, allVariables);
