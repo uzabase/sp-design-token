@@ -1,6 +1,6 @@
 
 // Do not edit directly
-// Generated on Wed, 20 Nov 2024 08:34:51 GMT
+// Generated on Thu, 21 Nov 2024 12:15:53 GMT
 
 export const spTokenTypes = [
 "color_primitive_amber_30",
@@ -617,6 +617,6 @@ color_semantic_text_required: "#ca3232",
 color_semantic_text_semi_weak: "#363636",
 color_semantic_text_text_link: "#404fbf",
 color_semantic_text_weak: "#6f6f6f",
-font_family_ja: "Arial, YakuHanJPs_Narrow, Hiragino Sans, Hiragino Kaku Gothic ProN, Meiryo, Noto Sans JP, sans-serif",
-font_family_zh: "Arial, YakuHanJPs_Narrow, 'PingFang SC', 'Microsoft YaHei', 'PingFang TC', Microsoft JhengHei, sans-serif",
+font_family_ja: "Arial, YakuHanJPs, Hiragino Sans, Hiragino Kaku Gothic ProN, Meiryo, Noto Sans JP, sans-serif",
+font_family_zh: "Arial, YakuHanJPs, 'PingFang SC', 'Microsoft YaHei', 'PingFang TC', Microsoft JhengHei, sans-serif",
 }

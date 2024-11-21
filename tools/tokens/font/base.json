@@ -2,10 +2,10 @@
   "font": {
     "family": {
       "ja": {
-        "value": "Arial, YakuHanJPs_Narrow, Hiragino Sans, Hiragino Kaku Gothic ProN, Meiryo, Noto Sans JP, sans-serif"
+        "value": "Arial, YakuHanJPs, Hiragino Sans, Hiragino Kaku Gothic ProN, Meiryo, Noto Sans JP, sans-serif"
       },
       "zh": {
-        "value": "Arial, YakuHanJPs_Narrow, 'PingFang SC', 'Microsoft YaHei', 'PingFang TC', Microsoft JhengHei, sans-serif"
+        "value": "Arial, YakuHanJPs, 'PingFang SC', 'Microsoft YaHei', 'PingFang TC', Microsoft JhengHei, sans-serif"
       }
     }
   }
